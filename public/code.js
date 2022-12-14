@@ -1,6 +1,7 @@
 (function(){
 
-	let receiverID;
+	let receiverID = [];
+	// let receiverID;
 	const socket = io();
 
 	function generateID(){
@@ -19,17 +20,28 @@
 	});
 
 	socket.on("init",function(uid){
-		receiverID = uid;
+		console.log('====================================');
+		console.log( "client id = " + uid );
+		console.log('====================================');
+		receiverID.push(uid)
+		// receiverID = uid
+		console.log( receiverID );
 		document.querySelector(".join-screen").classList.remove("active");
 		document.querySelector(".fs-screen").classList.add("active");
 	});
 
 	document.querySelector("#file-input").addEventListener("change",function(e){
+		console.log('====================================');
+		console.log( "caling" );
+		console.log('====================================');
 		let file = e.target.files[0];
 		if(!file){
 			return;		
 		}
 		let reader = new FileReader();
+		console.log('====================================');
+		console.log( reader);
+		console.log('====================================');
 		reader.onload = function(e){
 			let buffer = new Uint8Array(reader.result);
 
@@ -40,29 +52,33 @@
 					<div class="filename">${file.name}</div>
 			`;
 			document.querySelector(".files-list").appendChild(el);
-			shareFile({
-				filename: file.name,
-				total_buffer_size:buffer.length,
-				buffer_size:1024,
-			}, buffer, el.querySelector(".progress"));
+			for (let index = 0; index < receiverID.length; index++) {
+				shareFile({
+					filename: file.name,
+					total_buffer_size:buffer.length,
+					buffer_size:1024,
+				}, buffer, el.querySelector(".progress"),receiverID[index] );
+			}	
+			
 		}
 		reader.readAsArrayBuffer(file);
 	});
 
 
-	function shareFile(metadata,buffer,progress_node){
+	function shareFile(metadata,buffer,progress_node, node_id){
+		console.log('====================================');
+		console.log( "file share ", node_id );
 		socket.emit("file-meta", {
-			uid:receiverID,
+			uid:node_id,
 			metadata:metadata
-		});
-		
+		});	
 		socket.on("fs-share",function(){
 			let chunk = buffer.slice(0,metadata.buffer_size);
 			buffer = buffer.slice(metadata.buffer_size,buffer.length);
 			progress_node.innerText = Math.trunc(((metadata.total_buffer_size - buffer.length) / metadata.total_buffer_size * 100));
 			if(chunk.length != 0){
 				socket.emit("file-raw", {
-					uid:receiverID,
+					uid:node_id,
 					buffer:chunk
 				});
 			} else {

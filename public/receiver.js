@@ -12,7 +12,15 @@
 		if(sender_uid.length == 0){
 			return;
 		}
+		console.log('====================================');
+		console.log( "sender id ");
+		console.log( sender_uid );
+		console.log('====================================');
 		let joinID = generateID();
+		console.log('====================================');
+		console.log( "my id " );
+		console.log( joinID );
+		console.log('====================================');
 		socket.emit("receiver-join", {
 			sender_uid:sender_uid,
 			uid:joinID
