@@ -25,6 +25,15 @@ io.on("connection", function(socket){
 	socket.on("file-raw",function(data){
 		socket.in(data.uid).emit("fs-share", data.buffer);
 	})
+	socket.on("newuser", function (username) {
+		socket.broadcast.emit("update", username + " joined the conversation");
+	});
+	socket.on("exituser", function (username) {
+		socket.broadcast.emit("update", username + " left the conversation");
+	});
+	socket.on("chat", function (message) {
+		socket.broadcast.emit("chat", message);
+	});
 });
 
 server.listen(5000);

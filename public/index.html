@@ -11,6 +11,10 @@
         <div class="form">
           <h2>Share your files</h2>
           <div class="form-input">
+            <label>Your Username</label>
+            <input type="text" id="username" />
+          </div>
+          <div class="form-input">
             <button id="sender-start-con-btn">Connect</button>
           </div>
           <div class="form-input" id="join-id"></div>
@@ -18,17 +22,28 @@
       </div>
 
       <div class="screen fs-screen">
-        <div class="file-input">
-          <label for="file-input">
-            Click here to Select files for sharing
-          </label>
-          <input type="file" id="file-input" />
+        <div class="before">
+          <div class="file-upload">
+            <div class="file-input">
+              <label for="file-input">
+                Click here to Select files for sharing
+              </label>
+              <input type="file" id="file-input" />
+            </div>
+            <div class="files-list">
+              <div class="title">Shared files</div>
+            </div>
+          </div>
         </div>
-        <div class="files-list">
-          <div class="title">Shared files</div>
-          <div class="item">
-            <div class="progress">0%</div>
-            <div class="filename">Abc.txt</div>
+        <div class="chat-screen">
+          <div class="header">
+            <div class="logo">Chat</div>
+            <button id="exit-chat">Exit</button>
+          </div>
+          <div class="messages"></div>
+          <div class="typebox">
+            <input type="text" id="message-input" />
+            <button id="send-message">Send</button>
           </div>
         </div>
       </div>

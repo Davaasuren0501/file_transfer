@@ -11,16 +11,13 @@ body {
 	display: none;
 }
 .screen.active {
-	display: block;
-}
-.app {
-	position: fixed;
-	top: 0px;
-	left: 50%;
-	transform: translateX(-50%);
+	display: flex;
 	width: 100%;
 	height: 100%;
-	max-width: 500px;
+}
+.app {
+	width: 100%;
+	height: 100vh;
 	border-left: 1px solid #ddd;
 	border-right: 1px solid #ddd;
 	background: #fff;
@@ -34,6 +31,12 @@ body {
 }
 .join-screen .form .form-input {
 	margin: 10px 0px;
+}
+.join-screen .form .form-input-1 {
+	margin: 10px 0px;
+}
+.join-screen .form .form-input-1 input{
+	padding: 5px;
 }
 .join-screen .form h2 {
 	font-size: 40px;
@@ -83,6 +86,13 @@ body {
 .fs-screen {
 	padding: 20px;
 }
+.fs-screen .before{
+	width: 50%;
+}
+.fs-screen .file-upload{
+	max-width: 500px;
+}
+
 .fs-screen .file-input {
 	width: 100%;
 	border: 2px dashed #555;
@@ -103,6 +113,7 @@ body {
 	display: flex;
 	justify-content: space-between;
 	gap: 20px;
+	max-width: 500px;
 	flex-wrap: wrap;
 }
 .fs-screen .files-list .title {
@@ -126,4 +137,87 @@ body {
 	padding: 5px;
 	font-size: 18px;
 	border-top: 1px solid #eee;
+}
+
+.fs-screen .chat-screen{
+	width: 50%;
+	background-color: red;
+}
+.fs-screen .chat-screen .header{
+	width: 100%;
+	background-color: black;
+	height: 50px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0px 20px;
+}
+.fs-screen .chat-screen .header .logo {
+	font-size: 18px;
+	color: #eee;
+	font-weight: 600;
+}
+.fs-screen .chat-screen .header button {
+	padding: 5px 10px;
+	border: 1px solid #eee;
+	background: transparent;
+	color: #eee;
+	font-size: 15px;
+	cursor: pointer;
+	outline: none;
+}
+.fs-screen .chat-screen .messages {
+	width: 100%;
+	height: calc(100% - 100px);
+	background: #f5f5f5;
+	overflow: auto;
+}
+.fs-screen  .chat-screen .messages .message {
+	display: flex;
+	padding: 10px;
+}
+.fs-screen .chat-screen .messages .message > div {
+	max-width: 80%;
+	background: #fff;
+	box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.05);
+	padding: 10px;
+}
+.fs-screen.chat-screen .messages .message.my-message {
+	justify-content: flex-end;
+}
+.fs-screen .chat-screen .messages .message.other-message {
+	justify-content: flex-start;
+}
+.fs-screen .chat-screen .messages .message .name {
+	font-size: 13px;
+	color: #555;
+	margin-bottom: 5px;
+}
+.fs-screen .chat-screen .messages .message .text {
+	word-wrap: break-word;
+}
+.fs-screen .chat-screen .messages .update {
+	text-align: center;
+	padding: 10px;
+	font-style: italic;
+}
+.fs-screen .chat-screen .typebox {
+	width: 100%;
+	height: 50px;
+	display: flex;
+}
+.fs-screen .chat-screen .typebox input {
+	flex: 1;
+	height: 50px;
+	font-size: 18px;
+}
+.fs-screen .chat-screen .typebox button {
+	width: 80px;
+	height: 100%;
+	background: #111;
+	color: #eee;
+	font-size: 16px;
+	outline: none;
+	border: none;
+	cursor: pointer;
 }
